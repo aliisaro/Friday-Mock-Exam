@@ -33,8 +33,8 @@ beforeAll(async () => {
 describe("Given there is fitness data in the database", () => {
   beforeEach(async () => {
     await Fitness.deleteMany({});
-    await api
-      .post("/api/fitness")
+    await api 
+    .post("/api/fitness")
       .set("Authorization", "Bearer" + token)
       .send(fitness[0])
       .send(fitness[1]);
@@ -48,6 +48,7 @@ describe("Given there is fitness data in the database", () => {
       .expect(200)
       .expect("Content-Type", /application\/json/);
   });
+});
 
   //ADD FITNESS DATA
   it("should create fitness data when POST /api/fitness is called", async () => {
@@ -73,14 +74,14 @@ describe("Given there is fitness data in the database", () => {
       .expect(200)
       .expect("Content-Type", /application\/json/);
   });
-});
+
 
   //UPDATE fitness data BY ID
-  it("should update one fitness by ID when PUT /api/fitness/:id is called", async () => {
+  it("should update one fitness data by ID when PUT /api/fitness/:id is called", async () => {
     const fitness = await Fitness.findOne();
     const updatedfitness = {
       title: "Running",
-      date: "2024-10-10",
+      date: new Date(),
       duration: 20,
       caloriesBurned: 400,
     };
