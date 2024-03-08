@@ -1,16 +1,22 @@
 import useField from "../hooks/useField";
 import useSignup from "../hooks/useSignup";
+import { useNavigate } from "react-router-dom";
 
-const Signup = () => {
+const Signup = ({ setIsAuthenticated }) => {
+  const navigate = useNavigate();
   const email = useField("email");
   const password = useField("password");
 
-  const { signup, isLoading, error } = useSignup("/api/users/signup");
+  const { signup, error } = useSignup(setIsAuthenticated);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
     signup({ email: email.value, password: password.value });
-    if (!error) console.log("success");
+    if (!error) {
+      console.log("success");
+      navigate("/");
+    }
+    console.log("Login Error from pages");
   };
 
   return (
